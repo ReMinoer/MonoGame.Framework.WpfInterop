@@ -32,7 +32,7 @@ namespace MonoGame.Framework.WpfInterop
 		private bool _loaded;
 
 		// Image source:
-		private RenderTarget2D _renderTarget;
+		public RenderTarget2D RenderTarget { get; private set; }
 		private bool _resetBackBuffer;
 		private TimeSpan _timeSinceStart = TimeSpan.Zero;
 
@@ -155,16 +155,16 @@ namespace MonoGame.Framework.WpfInterop
 		private void CreateBackBuffer()
 		{
 			_d3D11Image.SetBackBuffer(null);
-			if (_renderTarget != null)
+			if (RenderTarget != null)
 			{
-				_renderTarget.Dispose();
-				_renderTarget = null;
+				RenderTarget.Dispose();
+				RenderTarget = null;
 			}
 
 			int width = Math.Max((int)ActualWidth, 1);
 			int height = Math.Max((int)ActualHeight, 1);
-			_renderTarget = new RenderTarget2D(_graphicsDevice, width, height, false, SurfaceFormat.Bgr32, DepthFormat.Depth24Stencil8, 0, RenderTargetUsage.DiscardContents, true);
-			_d3D11Image.SetBackBuffer(_renderTarget);
+			RenderTarget = new RenderTarget2D(_graphicsDevice, width, height, false, SurfaceFormat.Bgr32, DepthFormat.Depth24Stencil8, 0, RenderTargetUsage.DiscardContents, true);
+			_d3D11Image.SetBackBuffer(RenderTarget);
 		}
 
 		private void InitializeImageSource()
@@ -216,7 +216,7 @@ namespace MonoGame.Framework.WpfInterop
 			{
 				_lastRenderingTime = renderingEventArgs.RenderingTime;
 
-				GraphicsDevice.SetRenderTarget(_renderTarget);
+				GraphicsDevice.SetRenderTarget(RenderTarget);
 				var diff = _timer.Elapsed - _timeSinceStart;
 				_timeSinceStart = _timer.Elapsed;
 				Render(new GameTime(_timer.Elapsed, diff));
@@ -268,10 +268,10 @@ namespace MonoGame.Framework.WpfInterop
 				_d3D11Image.Dispose();
 				_d3D11Image = null;
 			}
-			if (_renderTarget != null)
+			if (RenderTarget != null)
 			{
-				_renderTarget.Dispose();
-				_renderTarget = null;
+				RenderTarget.Dispose();
+				RenderTarget = null;
 			}
 		}
 
