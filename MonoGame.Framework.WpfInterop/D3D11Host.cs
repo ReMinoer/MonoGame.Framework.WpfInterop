@@ -29,7 +29,6 @@ namespace MonoGame.Framework.WpfInterop
 		private D3D11Image _d3D11Image;
 		private bool _disposed;
 		private TimeSpan _lastRenderingTime;
-		private bool _loaded;
 
 		// Image source:
 		public RenderTarget2D RenderTarget { get; private set; }
@@ -51,9 +50,10 @@ namespace MonoGame.Framework.WpfInterop
 			_timer = new Stopwatch();
 			Loaded += OnLoaded;
 			Unloaded += OnUnloaded;
+            Initialized += OnInitialized;
 		}
 
-		#endregion
+	    #endregion
 
 		#region Properties
 
@@ -98,13 +98,22 @@ namespace MonoGame.Framework.WpfInterop
 			_disposed = true;
 
 			Dispose(true);
-		}
+            UnitializeImageSource();
+            UninitializeGraphicsDevice();
+        }
 
 		protected abstract void Dispose(bool disposing);
 
-		protected virtual void Initialize()
-		{
-		}
+        private void OnInitialized(object sender, EventArgs eventArgs)
+        {
+            Initialize();
+        }
+
+        protected virtual void Initialize()
+        {
+            InitializeGraphicsDevice();
+            InitializeImageSource();
+        }
 
 		/// <summary>
 		/// Raises the <see cref="FrameworkElement.SizeChanged" /> event, using the specified 
@@ -190,19 +199,15 @@ namespace MonoGame.Framework.WpfInterop
 
 		private void OnLoaded(object sender, RoutedEventArgs eventArgs)
 		{
-			if (IsInDesignMode || _loaded)
+			if (IsInDesignMode)
 				return;
-
-			_loaded = true;
-			InitializeGraphicsDevice();
-			InitializeImageSource();
-			Initialize();
+            
 			StartRendering();
 		}
 
 		private void OnRendering(object sender, EventArgs eventArgs)
 		{
-			if (!_timer.IsRunning)
+			if (!_timer.IsRunning || !IsLoaded)
 				return;
 
 			// Recreate back buffer if necessary.
@@ -235,10 +240,7 @@ namespace MonoGame.Framework.WpfInterop
 				return;
 
 			StopRendering();
-			Dispose();
-			UnitializeImageSource();
-			UninitializeGraphicsDevice();
-		}
+        }
 
 		private void StartRendering()
 		{
@@ -260,12 +262,12 @@ namespace MonoGame.Framework.WpfInterop
 
 		private void UnitializeImageSource()
 		{
-			_d3D11Image.IsFrontBufferAvailableChanged -= OnIsFrontBufferAvailableChanged;
 			Source = null;
 
 			if (_d3D11Image != null)
-			{
-				_d3D11Image.Dispose();
+            {
+                _d3D11Image.IsFrontBufferAvailableChanged -= OnIsFrontBufferAvailableChanged;
+                _d3D11Image.Dispose();
 				_d3D11Image = null;
 			}
 			if (RenderTarget != null)
