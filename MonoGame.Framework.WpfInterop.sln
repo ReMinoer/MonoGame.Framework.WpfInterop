@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTest", "WpfTest\WpfTest.csproj", "{47B74078-7603-4364-9E22-DE6FC395EBB8}"
 EndProject
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{809F0D79-AEDC-4754-A213-FDBE97CCD6D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{809F0D79-AEDC-4754-A213-FDBE97CCD6D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{809F0D79-AEDC-4754-A213-FDBE97CCD6D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{809F0D79-AEDC-4754-A213-FDBE97CCD6D6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{47B74078-7603-4364-9E22-DE6FC395EBB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{47B74078-7603-4364-9E22-DE6FC395EBB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47B74078-7603-4364-9E22-DE6FC395EBB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47B74078-7603-4364-9E22-DE6FC395EBB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{809F0D79-AEDC-4754-A213-FDBE97CCD6D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{809F0D79-AEDC-4754-A213-FDBE97CCD6D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{809F0D79-AEDC-4754-A213-FDBE97CCD6D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{809F0D79-AEDC-4754-A213-FDBE97CCD6D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
