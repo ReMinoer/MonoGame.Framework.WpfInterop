@@ -33,16 +33,18 @@
     </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.5.1.1679" />
+    <PackageReference Include="MonoGame.Framework.WindowsDX">
+      <Version>3.6.0.1625</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="SharpDX">
-      <HintPath>$(SolutionDir)\packages\MonoGame.Framework.WindowsDX.3.5.1.1679\lib\net40\SharpDX.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\MonoGame.Framework.WindowsDX.3.6.0.1625\lib\net40\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D9">
-      <HintPath>$(SolutionDir)\packages\MonoGame.Framework.WindowsDX.3.5.1.1679\lib\net40\SharpDX.Direct3D9.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\MonoGame.Framework.WindowsDX.3.6.0.1625\lib\net40\SharpDX.Direct3D9.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
