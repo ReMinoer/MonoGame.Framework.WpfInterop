@@ -8,8 +8,7 @@ using System.Windows.Media;
 
 namespace MonoGame.Framework.WpfInterop
 {
-    public abstract class D3D11Client<TRunner> : Image, IDisposable
-        where TRunner : class, IGameRunner
+    public abstract class D3D11Client : Image, IDisposable
 	{
         #region Fields
 
@@ -25,7 +24,7 @@ namespace MonoGame.Framework.WpfInterop
 		private bool _resetBackBuffer;
 	    private bool _isRendering;
 
-        private TRunner _runner;
+        private IGameRunner _runner;
 
         #endregion
 
@@ -86,10 +85,13 @@ namespace MonoGame.Framework.WpfInterop
                     throw new InvalidOperationException();
 
                 _graphicsDevice = value;
+                IsGraphicsDeviceInitialized = true;
             }
         }
-        
-        public TRunner Runner
+
+	    static public bool IsGraphicsDeviceInitialized { get; private set; }
+
+	    public IGameRunner Runner
         {
             get { return _runner; }
             set
@@ -173,6 +175,8 @@ namespace MonoGame.Framework.WpfInterop
                     _graphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.HiDef, presentationParameters);
                 }
             }
+
+            IsGraphicsDeviceInitialized = true;
         }
 
         private static void UninitializeGraphicsDevice()
@@ -245,17 +249,13 @@ namespace MonoGame.Framework.WpfInterop
 				CreateBackBuffer();
             
 			GraphicsDevice.SetRenderTarget(RenderTarget);
-			Draw(e.GameTime);
+			Runner.Draw(this, e.GameTime);
 			GraphicsDevice.Flush();
 
 			_d3D11Image.Invalidate(); // Always invalidate D3DImage to reduce flickering
 									  // during window resizing.
 
 			_resetBackBuffer = false;
-        }
-
-        protected virtual void Draw(GameTime time)
-        {
         }
 
         private void RunnerOnDisposed(object sender, EventArgs eventArgs)
