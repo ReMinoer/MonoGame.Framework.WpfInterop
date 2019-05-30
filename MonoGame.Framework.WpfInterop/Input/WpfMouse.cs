@@ -127,7 +127,7 @@ namespace MonoGame.Framework.WpfInterop.Input
 			e.Handled = true;
 			var m = _mouseState;
 			var w = e as MouseWheelEventArgs;
-			_mouseState = new MouseState((int)pos.X, (int)pos.Y, m.ScrollWheelValue + w?.Delta ?? 0, (ButtonState)e.LeftButton, (ButtonState)e.MiddleButton, (ButtonState)e.RightButton, (ButtonState)e.XButton1, (ButtonState)e.XButton2);
+			_mouseState = new MouseState((int)pos.X, (int)pos.Y, m.ScrollWheelValue + (w?.Delta ?? 0), (ButtonState)e.LeftButton, (ButtonState)e.MiddleButton, (ButtonState)e.RightButton, (ButtonState)e.XButton1, (ButtonState)e.XButton2);
 		}
 
 		/// <summary>
