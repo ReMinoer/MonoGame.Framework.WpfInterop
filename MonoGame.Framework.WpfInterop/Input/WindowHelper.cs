@@ -21,9 +21,9 @@ namespace MonoGame.Framework.WpfInterop.Input
 
 		public static bool IsControlOnActiveWindow(IInputElement element)
 		{
-			var activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+			var activeWindow = Application.Current.Windows.OfType<Window>().Where(x => x.IsActive);
 			var ctrlWindow = GetWindowFrom(element);
-			return ctrlWindow == activeWindow;
+			return activeWindow.Contains(ctrlWindow);
 		}
 
 		private static Window GetWindowFrom(IInputElement focusElement)
