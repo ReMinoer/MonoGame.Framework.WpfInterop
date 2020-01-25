@@ -130,6 +130,11 @@ namespace MonoGame.Framework.WpfInterop.Input
 			_mouseState = new MouseState((int)pos.X, (int)pos.Y, m.ScrollWheelValue + (w?.Delta ?? 0), (ButtonState)e.LeftButton, (ButtonState)e.MiddleButton, (ButtonState)e.RightButton, (ButtonState)e.XButton1, (ButtonState)e.XButton2);
 		}
 
+	    public void Reset()
+	    {
+            _mouseState = new MouseState();
+	    }
+
 		/// <summary>
 		/// Sets the cursor to the specific coordinates within the attached game.
 		/// This is required as the monogame Mouse.SetPosition function relies on the underlying Winforms implementation and will not work with WPF.
