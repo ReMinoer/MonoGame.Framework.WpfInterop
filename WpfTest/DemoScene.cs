@@ -75,7 +75,7 @@ namespace WpfTest
 			_projectionMatrix = Matrix.CreatePerspectiveFieldOfView(
 				MathHelper.ToRadians(45),  // 45 degree angle
 				(float)GraphicsDevice.Viewport.Width /
-				(float)GraphicsDevice.Viewport.Height,
+				GraphicsDevice.Viewport.Height,
 				1.0f, 100.0f);
 
 			_basicEffect = new BasicEffect(GraphicsDevice);

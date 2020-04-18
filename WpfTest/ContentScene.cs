@@ -11,7 +11,6 @@ namespace WpfTest
 		#region Fields
 
 		private int posX = 100, posY = 100;
-		private IGraphicsDeviceService _graphicsDeviceManager;
 		private WpfKeyboard _keyboard;
 		private KeyboardState _keyboardState;
 		private WpfMouse _mouse;
@@ -55,9 +54,9 @@ namespace WpfTest
 		protected override void Initialize()
 		{
 			base.Initialize();
-			_graphicsDeviceManager = new WpfGraphicsDeviceService(this);
+            var _ = new WpfGraphicsDeviceService(this);
 
-			_texture = Content.Load<Texture2D>("hello");
+            _texture = Content.Load<Texture2D>("hello");
 
 			_spriteBatch = new SpriteBatch(GraphicsDevice);
 
